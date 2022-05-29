@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Chat App</string>
+    <string name="loginwelcome">WELCOME TO MY CHAT APP</string>
+    <string name="creatActBTn">CREATE A NEW ACCOUNT</string>
+    <string name="createActBTn">CREATE NEW ACCOUNT</string>
+    <string name="Loginbtn">ALREADY HAVE AN ACCOUNT?</string>
+    <string name="entaMail">ENTER EMAIL</string>
+    <string name="entausername">ENTER NAME</string>
+    <string name="entaPaswrd">ENTER PASSWORD </string>
+    <string name="login">Login</string>
+</resources>

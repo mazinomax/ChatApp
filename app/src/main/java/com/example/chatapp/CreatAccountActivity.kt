@@ -2,6 +2,7 @@
 
 package com.example.chatapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -59,7 +60,10 @@ class CreatAccountActivity : AppCompatActivity() {
                         refUsers.updateChildren(userHasmap).addOnCompleteListener {
                             task ->
                             if (task.isSuccessful){
-                                Toast.makeText(this,"User Created ",Toast.LENGTH_LONG).show()
+                                var dashBoardIntent = Intent(this,DashboardActivity::class.java)
+                                dashBoardIntent.putExtra("name", displayName)
+                                startActivity(dashBoardIntent)
+                                finish()
                             }else {
                                 Toast.makeText(this,"User Not Created",Toast.LENGTH_LONG).show()
                             }

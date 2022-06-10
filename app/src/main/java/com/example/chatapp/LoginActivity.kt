@@ -8,21 +8,36 @@ import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var refUsers: DatabaseReference
+    private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
+    private lateinit var user: FirebaseUser
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         mAuth = FirebaseAuth.getInstance()
+        mAuthListener = FirebaseAuth.AuthStateListener {
+            firebaseAuth: FirebaseAuth ->
+            user = firebaseAuth.currentUser!!
+           // we login to dashboard if user is already logged in
+            if (user != null) {
+                startActivity(Intent(this, DashboardActivity::class.java))
+                finish()
+            }else{
+                Toast.makeText(this,"Login Failed, Please Retry...", Toast.LENGTH_LONG).show()
+            }
+        }
 
 
-        loginButtonId.setOnClickListener {
+        loginButtonId!!.setOnClickListener {
             var email = loginEmailETID.text.toString().trim()
             var password = loginPaswrdETID.text.toString().trim()
             if (email.isNotEmpty() || password.isNotEmpty()){
@@ -53,6 +68,19 @@ class LoginActivity : AppCompatActivity() {
 
             }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mAuth.addAuthStateListener(mAuthListener)
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener)
+        }
     }
 
 

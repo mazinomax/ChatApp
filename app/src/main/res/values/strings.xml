@@ -8,4 +8,9 @@
     <string name="entausername">ENTER NAME</string>
     <string name="entaPaswrd">ENTER PASSWORD </string>
     <string name="login">Login</string>
+    <string name="users">Users</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chats">chats</string>
+    <string name="Users">users</string>
 </resources>

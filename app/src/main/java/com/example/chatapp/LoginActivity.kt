@@ -24,17 +24,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         mAuth = FirebaseAuth.getInstance()
-        mAuthListener = FirebaseAuth.AuthStateListener {
-            firebaseAuth: FirebaseAuth ->
-            user = firebaseAuth.currentUser!!
-           // we login to dashboard if user is already logged in
-            if (user != null) {
-                startActivity(Intent(this, DashboardActivity::class.java))
-                finish()
-            }else{
-                Toast.makeText(this,"Login Failed, Please Retry...", Toast.LENGTH_LONG).show()
-            }
-        }
+
+
 
 
         loginButtonId!!.setOnClickListener {
@@ -52,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
-        mAuth!!.signInWithEmailAndPassword(email,password)
+        mAuth.signInWithEmailAndPassword(email,password)
             .addOnCompleteListener {
                 task: Task<AuthResult> ->
                 if (task.isSuccessful){
@@ -60,8 +51,9 @@ class LoginActivity : AppCompatActivity() {
                         var username = email.split('@')[0]
                     var dashBoardIntent = Intent(this,DashboardActivity::class.java)
                     dashBoardIntent.putExtra("name", username)
-                    startActivity(dashBoardIntent)
                     finish()
+                    startActivity(dashBoardIntent)
+
                 } else {
                     Toast.makeText(this,"Login Failed...", Toast.LENGTH_LONG).show()
                 }
@@ -69,19 +61,10 @@ class LoginActivity : AppCompatActivity() {
             }
 
     }
+ // we login to dashboard if user is already logged in
 
-    override fun onStart() {
-        super.onStart()
-        mAuth.addAuthStateListener(mAuthListener)
 
-    }
 
-    override fun onStop() {
-        super.onStop()
-        if (mAuthListener != null){
-            mAuth.removeAuthStateListener(mAuthListener)
-        }
-    }
 
 
 }

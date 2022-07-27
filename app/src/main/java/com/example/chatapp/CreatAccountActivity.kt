@@ -56,6 +56,7 @@ class CreatAccountActivity : AppCompatActivity() {
                         userHasmap["display_name"] = displayName
                         userHasmap["status"] = "Hello There..."
                         userHasmap["thumb_image"] = "default"
+                        userHasmap["image"] = "default"
                         Log.d("CHECK","TSUCCESS")
                         refUsers.updateChildren(userHasmap).addOnCompleteListener {
                             task ->

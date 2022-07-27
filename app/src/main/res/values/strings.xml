@@ -7,6 +7,7 @@
     <string name="entaMail">ENTER EMAIL</string>
     <string name="entausername">ENTER NAME</string>
     <string name="entaPaswrd">ENTER PASSWORD </string>
+    <string name="entayourstatus">ENTER YOUR STATUS </string>
     <string name="login">Login</string>
     <string name="users">Users</string>
     <!-- TODO: Remove or change this placeholder text -->

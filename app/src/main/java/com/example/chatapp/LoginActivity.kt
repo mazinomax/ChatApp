@@ -27,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
         loginButtonId!!.setOnClickListener {
             var email = loginEmailETID.text.toString().trim()
             var password = loginPaswrdETID.text.toString().trim()
@@ -36,11 +35,11 @@ class LoginActivity : AppCompatActivity() {
             } else{
                 Toast.makeText(this,"Please Enter Email or Password",Toast.LENGTH_LONG).show()
             }
-
         }
 
 
     }
+
 
     private fun loginUser(email: String, password: String) {
         mAuth.signInWithEmailAndPassword(email,password)

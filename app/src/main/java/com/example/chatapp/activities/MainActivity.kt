@@ -1,8 +1,9 @@
-package com.example.chatapp
+package com.example.chatapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.chatapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -37,12 +38,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         creatnewActId.setOnClickListener {
-            startActivity(Intent(this,CreatAccountActivity::class.java))
+            startActivity(Intent(this, CreatAccountActivity::class.java))
             finish()
         }
 
         haveAccLoginbtnID.setOnClickListener {
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }

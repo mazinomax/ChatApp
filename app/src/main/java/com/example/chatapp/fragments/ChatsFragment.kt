@@ -18,6 +18,12 @@ class ChatsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chats, container, false)
+
+        readData()
+    }
+
+    private fun readData() {
+        TODO("Not yet implemented")
     }
 
 }

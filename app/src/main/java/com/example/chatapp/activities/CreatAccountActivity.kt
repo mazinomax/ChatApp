@@ -1,15 +1,13 @@
 @file:Suppress("NAME_SHADOWING")
 
-package com.example.chatapp
+package com.example.chatapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import com.example.chatapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -61,7 +59,7 @@ class CreatAccountActivity : AppCompatActivity() {
                         refUsers.updateChildren(userHasmap).addOnCompleteListener {
                             task ->
                             if (task.isSuccessful){
-                                var dashBoardIntent = Intent(this,DashboardActivity::class.java)
+                                var dashBoardIntent = Intent(this, DashboardActivity::class.java)
                                 dashBoardIntent.putExtra("name", displayName)
                                 startActivity(dashBoardIntent)
                                 finish()

@@ -1,11 +1,11 @@
-package com.example.chatapp
+package com.example.chatapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.google.android.gms.tasks.Task
+import com.example.chatapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -48,7 +48,7 @@ class StatusActivity : AppCompatActivity() {
                 task ->
                 if (task.isSuccessful){
                     Toast.makeText(this,"Status Updated Successfully", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this,settingsActivity::class.java))
+                    startActivity(Intent(this, settingsActivity::class.java))
                     finish()
                 }else {
                     Toast.makeText(this,"Status Not Updated ", Toast.LENGTH_LONG).show()

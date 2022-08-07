@@ -1,37 +1,27 @@
-package com.example.chatapp
+package com.example.chatapp.activities
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.graphics.Bitmap
-import android.os.Build
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.chatapp.R
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import com.squareup.picasso.NetworkPolicy
-import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import id.zelory.compressor.Compressor
 //import id.zelory.compressor.Compressor.compress
 import kotlinx.android.synthetic.main.activity_settings.*
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.IOException
-import java.util.*
 import kotlin.collections.HashMap
 import android.net.Uri as Uri1
 
@@ -41,7 +31,7 @@ class settingsActivity : AppCompatActivity() {
     private lateinit var mStorageRef: StorageReference
     private lateinit var mStorage: FirebaseStorage
     private lateinit var mCurrentUser:FirebaseUser
-    private lateinit var imageuri: Uri1
+   // private lateinit var imageuri: Uri1
     var galleryId: Int = 203
     //private lateinit var mCurrentUser: FirebaseUser
 
@@ -93,7 +83,7 @@ class settingsActivity : AppCompatActivity() {
 
 
         settChangeStatusButnID.setOnClickListener {
-            var statusintent = Intent(this,StatusActivity::class.java)
+            var statusintent = Intent(this, StatusActivity::class.java)
             statusintent.putExtra("status",settstatusTVID.text.toString().trim())
             startActivity(statusintent)
         }
@@ -129,7 +119,7 @@ class settingsActivity : AppCompatActivity() {
             if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                 val result = CropImage.getActivityResult(data)
 
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == Activity.RESULT_OK && data != null) {
                     val resultUri = result!!.uri
                     var userId = mCurrentUser.uid
                     var thumbFile = File(resultUri!!.path!!)
@@ -205,6 +195,7 @@ class settingsActivity : AppCompatActivity() {
                                             "Error",
                                             Toast.LENGTH_LONG
                                         ).show()
+
 
 
                                     }

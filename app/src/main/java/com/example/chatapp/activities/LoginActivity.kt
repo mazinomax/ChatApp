@@ -1,10 +1,10 @@
-package com.example.chatapp
+package com.example.chatapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Toast
+import com.example.chatapp.R
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful){
                     // we have to split the display name
                         var username = email.split('@')[0]
-                    var dashBoardIntent = Intent(this,DashboardActivity::class.java)
+                    var dashBoardIntent = Intent(this, DashboardActivity::class.java)
                     dashBoardIntent.putExtra("name", username)
                     finish()
                     startActivity(dashBoardIntent)

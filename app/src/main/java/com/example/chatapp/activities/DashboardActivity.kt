@@ -1,9 +1,10 @@
-package com.example.chatapp
+package com.example.chatapp.activities
 
 import android.content.Intent
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -13,9 +14,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.activity_dashboard.view.*
+import com.example.chatapp.R
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
@@ -23,6 +24,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var sectionAdapter: SectionPagerAdapter
     private lateinit var tabs: TabLayout
     private lateinit var viewpager: ViewPager2
+    private lateinit var mCurrentUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -30,9 +32,13 @@ class DashboardActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
+        readData()
+
         if (intent.extras != null) {
             var username = intent.extras!!.get("name")
             Toast.makeText(this,username.toString(),Toast.LENGTH_LONG).show()
+
+
         }
         // changing title of dashboard
         supportActionBar!!.title = "DashBoard"
@@ -70,16 +76,39 @@ class DashboardActivity : AppCompatActivity() {
                 // log user out
                 FirebaseAuth.getInstance().signOut()
                 // take user to mainactivity after signing out
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             if (item.itemId == R.id.menuSettingsID){
                 // take user to settings activity
-                startActivity(Intent(this,settingsActivity::class.java))
+                startActivity(Intent(this, settingsActivity::class.java))
                 finish()
             }
 
         return true
+    }
+
+    private fun readData() {
+
+        mCurrentUser = FirebaseAuth.getInstance().currentUser!!
+        var userId = mCurrentUser.uid
+        refUsers = FirebaseDatabase.getInstance().reference.child("users").child(userId)
+
+        refUsers.get().addOnSuccessListener {
+            if (it.exists()){
+                val displayName = it.child("display_name").value
+                val status = it.child("status").value
+                val image = it.child("image").value
+                Log.d("displayname",displayName.toString())
+                Log.d("status",status.toString())
+                Log.d("image",image.toString())
+
+            } else {
+                Toast.makeText(this, "user does not exist", Toast.LENGTH_LONG).show()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "failed", Toast.LENGTH_LONG).show()
+        }
     }
 
 }

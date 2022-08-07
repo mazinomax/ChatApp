@@ -8,6 +8,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/userRecyclerView"
+        tools:listitem="@layout/users_row"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
